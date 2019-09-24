@@ -63,7 +63,50 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String = TODO()
+fun ageDescription(age: Int): String {
+    val a = (age % 10)
+    var abc = "hello"
+    if (age > 199) abc = "введите число от 0 до 200"
+    if (age == 0) abc = "введите число от 0 до 200"
+    if (age > 119)
+        when (a) {
+            1 -> abc = "$age год"
+            2 -> abc = "$age года"
+            3 -> abc = "$age года"
+            4 -> abc = "$age года"
+            5 -> abc = "$age лет"
+            6 -> abc = "$age лет"
+            7 -> abc = "$age лет"
+            8 -> abc = "$age лет"
+            9 -> abc = "$age лет"
+            0 -> abc = "$age лет"
+        }
+    if (age < 120)
+        if (age > 104) abc = "$age лет"
+    if (age < 105)
+        if (age > 19)
+            when(a) {
+                1 -> abc = "$age год"
+                2 -> abc = "$age года"
+                3 -> abc = "$age года"
+                4 -> abc = "$age года"
+                5 -> abc = "$age лет"
+                6 -> abc = "$age лет"
+                7 -> abc = "$age лет"
+                8 -> abc = "$age лет"
+                9 -> abc = "$age лет"
+                0 -> abc = "$age лет"
+            }
+    if (age < 20)
+        if (age > 4) abc = "$age лет"
+    if (age < 5)
+        if (age > 1) abc = "$age года"
+    if (age == 1) abc = "$age год"
+    println("$abc")
+ return abc
+}
+
+
 
 /**
  * Простая
@@ -76,7 +119,14 @@ fun timeForHalfWay(
     t1: Double, v1: Double,
     t2: Double, v2: Double,
     t3: Double, v3: Double
-): Double = TODO()
+): Double {
+    var a: Double = ((t1 * v1) + (t2 * v2) + (t3 * v3)) / 2
+    if (a > (t1 * v1))
+        if (a > (t2 * v2) + (t1 * v1)) a = t1 + t2 + ((a - ((t1 * v1) + (t2 * v2))) / v3)
+        else a = t1 + ((a - (t1 * v1)) / v2)
+    else a = (a / v1)
+    return a
+}
 
 /**
  * Простая

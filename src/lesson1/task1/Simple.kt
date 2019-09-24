@@ -106,7 +106,7 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = TODO()
  * Определить третью цифру справа в этом числе (в данном случае 8).
  */
 fun thirdDigit(number: Int): Int {
-    var a = (((number / 10) / 10) % 10)
+    val a = (((number / 10) / 10) % 10)
     return a
 }
 
@@ -118,11 +118,11 @@ fun thirdDigit(number: Int): Int {
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
 fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int {
-    var a = ((hoursArrive * 60) + minutesArrive) - ((hoursDepart * 60) + minutesDepart)
+    val a = ((hoursArrive * 60) + minutesArrive) - ((hoursDepart * 60) + minutesDepart)
     return a
 }
 fun main4(args: Array<String>) {
-    var b = travelMinutes(12, 5,7,2)
+    val b = travelMinutes(12, 5,7,2)
     println("время в пути в минутах: $b")
 }
 

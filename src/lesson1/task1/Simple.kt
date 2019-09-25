@@ -59,9 +59,8 @@ fun main() {
  * Пользователь задает время в часах, минутах и секундах, например, 8:20:35.
  * Рассчитать время в секундах, прошедшее с начала суток (30035 в данном случае).
  */
-fun seconds(hours: Int, minutes: Int, seconds: Int): Int {
-    return (hours * 3600) + (minutes * 60) + (seconds)
-}
+fun seconds(hours: Int, minutes: Int, seconds: Int): Int =
+    (hours * 3600) + (minutes * 60) + (seconds)
 fun main(args: Array<String>) {
     val abc = seconds(2, 10, 8)
     println("Время в секундах: $abc")
@@ -73,10 +72,8 @@ fun main(args: Array<String>) {
  * Определить длину того же отрезка в метрах (в данном случае 18.98).
  * 1 сажень = 3 аршина = 48 вершков, 1 вершок = 4.445 см.
  */
-fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double {
-    val c = 4.445
-    return ((sagenes * 48 * c) + (arshins * 16 * c) + (vershoks * c)) / 100
-}
+fun lengthInMeters(sagenes: Int, arshins: Int, vershoks: Int): Double =
+    ((sagenes * 48) * 4.445 + (arshins * 16) * 4.445 + vershoks * 4.445) / 100
 //fun main(args: Array<String>) {
 //    var sum = lengthInMeters(8, 2, 11)
 //    println(" &sum метров")
@@ -105,10 +102,7 @@ fun trackLength(x1: Double, y1: Double, x2: Double, y2: Double): Double = TODO()
  * Пользователь задает целое число, большее 100 (например, 3801).
  * Определить третью цифру справа в этом числе (в данном случае 8).
  */
-fun thirdDigit(number: Int): Int {
-    val a = (((number / 10) / 10) % 10)
-    return a
-}
+fun thirdDigit(number: Int): Int = ((number / 100) % 10)
 
 /**
  * Простая
@@ -117,10 +111,8 @@ fun thirdDigit(number: Int): Int {
  * прибыл на станцию назначения в h2 часов m2 минут того же дня (например в 13:01).
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
-fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int {
-    val a = ((hoursArrive * 60) + minutesArrive) - ((hoursDepart * 60) + minutesDepart)
-    return a
-}
+fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int =
+    ((hoursArrive * 60) + minutesArrive) - ((hoursDepart * 60) + minutesDepart)
 fun main4(args: Array<String>) {
     val b = travelMinutes(12, 5,7,2)
     println("время в пути в минутах: $b")
@@ -141,10 +133,7 @@ fun accountInThreeYears(initial: Int, percent: Int): Double = TODO()
  * Пользователь задает целое трехзначное число (например, 478).
  * Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
-fun numberRevert(number: Int): Int {
-    val a = ((number % 10) * 100) + ((number / 10) % 10 * 10) + (number / 100) % 10
-    return a
-}
+fun numberRevert(number: Int): Int = ((number % 10) * 100) + ((number / 10) % 10 * 10) + (number / 100) % 10
 fun mainnn(args: Array<String>) {
     val b = numberRevert(376)
     println("&b")

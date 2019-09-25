@@ -120,10 +120,10 @@ fun timeForHalfWay(
     t2: Double, v2: Double,
     t3: Double, v3: Double
 ): Double {
-    var a: Double = ((t1 * v1) + (t2 * v2) + (t3 * v3)) / 2
+    var a = ((t1 * v1) + (t2 * v2) + (t3 * v3)) / 2
     if (a > (t1 * v1))
-        if (a > (t2 * v2) + (t1 * v1)) a = t1 + t2 + ((a - ((t1 * v1) + (t2 * v2))) / v3)
-        else a = t1 + ((a - (t1 * v1)) / v2)
+        a = if (a > (t2 * v2) + (t1 * v1)) t1 + t2 + ((a - ((t1 * v1) + (t2 * v2))) / v3)
+        else t1 + ((a - (t1 * v1)) / v2)
     else a = (a / v1)
     return a
 }

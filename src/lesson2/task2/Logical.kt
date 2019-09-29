@@ -28,13 +28,9 @@ fun isNumberHappy(number: Int): Boolean =
  * Определить, угрожают ли они друг другу. Вернуть true, если угрожают.
  * Считать, что ферзи не могут загораживать друг друга.
  */
-fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean {
-    var a: Boolean = false
-    if (Math.abs(x2 - x1) == Math.abs(y2 - y1)) a = true
-    if (x1 == x2) a = true
-    if (y1 == y2) a = true
-    return a
-}
+fun queenThreatens(x1: Int, y1: Int, x2: Int, y2: Int): Boolean =
+    Math.abs(x2 - x1) == Math.abs(y2 - y1) || x1 == x2 || y1 == y2
+
 
 /**
  * Простая
@@ -54,7 +50,9 @@ fun daysInMonth(month: Int, year: Int): Int = TODO()
 fun circleInside(
     x1: Double, y1: Double, r1: Double,
     x2: Double, y2: Double, r2: Double
-): Boolean = TODO()
+): Boolean =
+    r2 - r1 >= Math.sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)))
+
 
 /**
  * Средняя
@@ -65,4 +63,5 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = TODO()
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean =
+    a <= r && b <= s || b <= r && a <= s || a <= r && c <= s || c <= r && a <= s || c <= r && b <= s || b <= r && c <= s

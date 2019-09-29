@@ -64,46 +64,16 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
 fun ageDescription(age: Int): String {
-    val a = (age % 10)
-    var abc = "hello"
-    if (age > 199) abc = "введите число от 0 до 200"
-    if (age == 0) abc = "введите число от 0 до 200"
-    if (age > 119)
-        when (a) {
-            1 -> abc = "$age год"
-            2 -> abc = "$age года"
-            3 -> abc = "$age года"
-            4 -> abc = "$age года"
-            5 -> abc = "$age лет"
-            6 -> abc = "$age лет"
-            7 -> abc = "$age лет"
-            8 -> abc = "$age лет"
-            9 -> abc = "$age лет"
-            0 -> abc = "$age лет"
+    if (age in 1..199)
+        return when {
+            age in 5..20 -> "$age лет"
+            age in 105..120 -> "$age лет"
+            age % 10 == 1 -> "$age год"
+            age % 10 in 2..4 -> "$age года"
+            age % 10 in 5..9 -> "$age лет"
+            else -> "$age лет"
         }
-    if (age < 120)
-        if (age > 104) abc = "$age лет"
-    if (age < 105)
-        if (age > 19)
-            when(a) {
-                1 -> abc = "$age год"
-                2 -> abc = "$age года"
-                3 -> abc = "$age года"
-                4 -> abc = "$age года"
-                5 -> abc = "$age лет"
-                6 -> abc = "$age лет"
-                7 -> abc = "$age лет"
-                8 -> abc = "$age лет"
-                9 -> abc = "$age лет"
-                0 -> abc = "$age лет"
-            }
-    if (age < 20)
-        if (age > 4) abc = "$age лет"
-    if (age < 5)
-        if (age > 1) abc = "$age года"
-    if (age == 1) abc = "$age год"
-    println("$abc")
- return abc
+    return "введите число от 1 до 199"
 }
 
 
@@ -120,12 +90,11 @@ fun timeForHalfWay(
     t2: Double, v2: Double,
     t3: Double, v3: Double
 ): Double {
-    var a = ((t1 * v1) + (t2 * v2) + (t3 * v3)) / 2
-    if (a > (t1 * v1))
-        a = if (a > (t2 * v2) + (t1 * v1)) t1 + t2 + ((a - ((t1 * v1) + (t2 * v2))) / v3)
+    val a = ((t1 * v1) + (t2 * v2) + (t3 * v3)) / 2
+    return if (a > (t1 * v1))
+        if (a > (t2 * v2) + (t1 * v1)) t1 + t2 + ((a - ((t1 * v1) + (t2 * v2))) / v3)
         else t1 + ((a - (t1 * v1)) / v2)
-    else a = (a / v1)
-    return a
+    else (a / v1)
 }
 
 /**
@@ -177,4 +146,15 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = TODO()
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
+    return if (c > a)
+        if (c <= b)
+            if (b > d) d - c
+            else b - c
+        else -1
+    else
+        if (a <= d)
+            if (b > d) d - a
+            else b - a
+        else -1
+}

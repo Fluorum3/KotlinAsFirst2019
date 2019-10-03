@@ -92,10 +92,10 @@ fun fib(n: Int): Int = if (n < 3) 1 else fib(n - 1) + fib(n - 2)
  * Для заданных чисел m и n найти наименьшее общее кратное, то есть,
  * минимальное число k, которое делится и на m и на n без остатка
  */
-fun lcm(m: Int, n: Int): Int {// не могу понять почему выдает 0, а не 24 (m = 6, n = 8)
+fun lcm(m: Int, n: Int): Int {
     var a = n
     while (a % m != 0)
-        a += a
+        a += n
     return a
 }
 
@@ -169,7 +169,7 @@ fun sin(x: Double, eps: Double): Double = TODO()
  * Подумайте, как добиться более быстрой сходимости ряда при больших значениях x.
  * Использовать kotlin.math.cos и другие стандартные реализации функции косинуса в этой задаче запрещается.
  */
-fun cos(x: Double, eps: Double): Double = TODO()
+ fun cos(x: Double, eps: Double): Double = TODO()
 
 /**
  * Средняя
@@ -178,7 +178,24 @@ fun cos(x: Double, eps: Double): Double = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var a = n
+    var b = 1
+    var c = n
+    for (i in 1..n) {
+        b *= 10
+        a /= 10
+        if (a == 0) break
+    }
+    b /= 10
+    a == 0
+    while (b != 0) {
+        a += c % 10 * b
+        b /= 10
+        c /= 10
+    }
+    return a
+}
 
 /**
  * Средняя
@@ -210,7 +227,29 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int {
+    var a = 0
+    var b = 0
+    var r = 0
+    var i = 0
+    while (r < n) {
+        i += 1
+        b = i * i
+        a = b
+        r += 1
+        while (b / 10 != 0) {
+            b /= 10
+            r += 1
+        }
+    }
+    r -= n
+    for (k in 0..r) {
+        b = a % 10
+        a /= 10
+
+    }
+    return b
+}
 
 /**
  * Сложная

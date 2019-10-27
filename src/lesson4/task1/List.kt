@@ -122,7 +122,14 @@ fun abs(v: List<Double>): Double = TODO()
  *
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
-fun mean(list: List<Double>): Double = TODO()
+fun mean(list: List<Double>): Double {
+    var a = 0.0
+    for (element in list)
+        a += element
+    if (list.size == 0) a = 0.0
+    else a /= list.size
+    return a
+}
 
 /**
  * Средняя
@@ -132,7 +139,16 @@ fun mean(list: List<Double>): Double = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun center(list: MutableList<Double>): MutableList<Double> = TODO()
+fun center(list: MutableList<Double>): MutableList<Double> {
+    if (list.isNotEmpty()) {
+        val c = mean(list)
+        for (i in 0 until list.size) {
+            val element = list[i]
+            list[i] = element - c
+        }
+    }
+    return list
+}
 
 /**
  * Средняя
@@ -151,7 +167,15 @@ fun times(a: List<Int>, b: List<Int>): Int = TODO()
  * Коэффициенты многочлена заданы списком p: (p0, p1, p2, p3, ..., pN).
  * Значение пустого многочлена равно 0 при любом x.
  */
-fun polynom(p: List<Int>, x: Int): Int = TODO()
+fun polynom(p: List<Int>, x: Int): Int {
+    var a = 0
+    var b = 1
+    for (element in p) {
+        a += element * b
+        b *= x
+    }
+    return a
+}
 
 /**
  * Средняя
@@ -163,7 +187,16 @@ fun polynom(p: List<Int>, x: Int): Int = TODO()
  *
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
-fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
+fun accumulate(list: MutableList<Int>): MutableList<Int> {
+    var a = 0
+    if (list.isNotEmpty()) {
+        for (i in 0 until list.size) {
+            a += list[i]
+            list[i] = a
+        }
+    }
+    return list
+}
 
 /**
  * Средняя
@@ -172,7 +205,19 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
  * Результат разложения вернуть в виде списка множителей, например 75 -> (3, 5, 5).
  * Множители в списке должны располагаться по возрастанию.
  */
-fun factorize(n: Int): List<Int> = TODO()
+fun factorize(n: Int): List<Int> {
+    var a = n
+    val list = mutableListOf<Int>()
+    while (a > 1) {
+        var b = 2
+        while (a % b != 0)
+            b += 1
+        a /= b
+        list.add(b)
+    }
+    list.sorted()
+    return list
+}
 
 /**
  * Сложная
@@ -181,7 +226,8 @@ fun factorize(n: Int): List<Int> = TODO()
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
+
 
 /**
  * Средняя
@@ -245,4 +291,54 @@ fun roman(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String {
+    var a = n
+    var k = -2
+    var r = 0
+    var b = mutableListOf<String>("", "", "", "тысяч ", "один ", "десять ", "сто ", "тысяча ", "два ", "двадцать ",
+        "двести ", "две тысячи ", "три ", "тридцать ", "триста ", "три тысячи ", "четыре ", "сорок ", "четыреста ",
+        "четыре тысячи ", "пять ", "пятьдесят ", "пятьсот ", "пять тысяч ", "шесть ", "шестьдесят ", "шестьсот ",
+        "шесть тысяч ", "семь ", "семьдесят ", "семьсот ", "семь тысяч ", "восемь ", "восемьдесят ", "восемьсот ",
+        "восемь тысяч ", "девять ", "девяносто ", "девятьсот ", "девять тысяч ", "" )
+    while (a != 0) {
+        if (k == 2) k = -2
+        r = a % 10
+        k += 1
+        if (a / 10 % 10 == 1 && k == -1 && b[40] == "" || a / 10 % 10 == 1 && k == 2) {
+            if (k == 2) {
+                k = 1 // -1
+                b[40] = "тысяч " + b[40]
+            }
+            if (k == -1) k == 1
+            when {
+                r == 0 -> b[40] = "десять " + b[40]
+                r == 1 -> b[40] = "одиннадцать " + b[40]
+                r == 2 -> b[40] = "двенадцать " + b[40]
+                r == 3 -> b[40] = "тринадцать " + b[40]
+                r == 4 -> b[40] = "четырнадцать " + b[40]
+                r == 5 -> b[40] = "пятнадцать " + b[40]
+                r == 6 -> b[40] = "шестнадцать " + b[40]
+                r == 7 -> b[40] = "семнадцать " + b[40]
+                r == 8 -> b[40] = "восемнадцать " + b[40]
+                r == 9 -> b[40] = "девятнадцать " + b[40]
+            }
+            a /= 100
+            r = a % 10
+        }
+        a /= 10
+        if (b[40] != "" && k == -1) k = 0
+        when {
+            r == 0 -> b[40] = b[k + 1] + b[40]
+            r == 1 -> b[40] = b[k + 5] + b[40]
+            r == 2 -> b[40] = b[k + 9] + b[40]
+            r == 3 -> b[40] = b[k + 13] + b[40]
+            r == 4 -> b[40] = b[k + 17] + b[40]
+            r == 5 -> b[40] = b[k + 21] + b[40]
+            r == 6 -> b[40] = b[k + 25] + b[40]
+            r == 7 -> b[40] = b[k + 29] + b[40]
+            r == 8 -> b[40] = b[k + 33] + b[40]
+            r == 9 -> b[40] = b[k + 37] + b[40]
+        }
+    }
+    return b[40].trim()
+}

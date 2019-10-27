@@ -88,7 +88,6 @@ fun fib(n: Int): Int {
     var a = 1
     for (i in 1..n) {
         if (i % 2 != 0) a += b else b += a
-        if (i == n) break
     }
     return if (n % 2 != 0) a else b
 }

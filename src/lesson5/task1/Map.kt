@@ -315,7 +315,7 @@ fun bagPacking(treasures: Map<String, Pair<Int, Int>>, capacity: Int): Set<Strin
     for ((a, b) in treasures) {
         s.add(b.second)
     }
-    val g = s.sorted()
+    val g = s.sortedDescending()
     for (i in g) {
         for ((l, n) in treasures) {
             if (i == n.second) {

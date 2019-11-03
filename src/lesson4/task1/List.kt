@@ -165,12 +165,11 @@ fun times(a: List<Int>, b: List<Int>): Int = TODO()
 fun polynom(p: List<Int>, x: Int): Int {
     var a = 0
     var b = 1
-    //p.map {it * b  b *= x }
     for (element in p) {
         a += element * b
         b *= x
     }
-    return a //b//p.sum()
+    return a
 }
 
 /**

@@ -123,12 +123,9 @@ fun abs(v: List<Double>): Double = TODO()
  * Рассчитать среднее арифметическое элементов списка list. Вернуть 0.0, если список пуст
  */
 fun mean(list: List<Double>): Double {
-    var a = 0.0
-    for (element in list)
-        a += element
-    if (list.size == 0) a = 0.0
-    else a /= list.size
-    return a
+    val a = list.sum()
+    return if (list.isEmpty()) 0.0
+    else a / list.size
 }
 
 /**
@@ -140,12 +137,10 @@ fun mean(list: List<Double>): Double {
  * Обратите внимание, что данная функция должна изменять содержание списка list, а не его копии.
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
-    if (list.isNotEmpty()) {
-        val c = mean(list)
-        for (i in 0 until list.size) {
-            val element = list[i]
-            list[i] = element - c
-        }
+    val c = mean(list)
+    for (i in 0 until list.size) {
+        val element = list[i]
+        list[i] = element - c
     }
     return list
 }
@@ -170,11 +165,12 @@ fun times(a: List<Int>, b: List<Int>): Int = TODO()
 fun polynom(p: List<Int>, x: Int): Int {
     var a = 0
     var b = 1
+    //p.map {it * b  b *= x }
     for (element in p) {
         a += element * b
         b *= x
     }
-    return a
+    return a //b//p.sum()
 }
 
 /**
@@ -189,11 +185,9 @@ fun polynom(p: List<Int>, x: Int): Int {
  */
 fun accumulate(list: MutableList<Int>): MutableList<Int> {
     var a = 0
-    if (list.isNotEmpty()) {
-        for (i in 0 until list.size) {
-            a += list[i]
-            list[i] = a
-        }
+    for (i in 0 until list.size) {
+        a += list[i]
+        list[i] = a
     }
     return list
 }
@@ -215,7 +209,6 @@ fun factorize(n: Int): List<Int> {
         a /= b
         list.add(b)
     }
-    list.sorted()
     return list
 }
 
@@ -295,50 +288,57 @@ fun russian(n: Int): String {
     var a = n
     var k = -2
     var r = 0
-    var b = mutableListOf<String>("", "", "", "тысяч ", "один ", "десять ", "сто ", "одна тысяча ", "два ", "двадцать ",
-        "двести ", "две тысячи ", "три ", "тридцать ", "триста ", "три тысячи ", "четыре ", "сорок ", "четыреста ",
-        "четыре тысячи ", "пять ", "пятьдесят ", "пятьсот ", "пять тысяч ", "шесть ", "шестьдесят ", "шестьсот ",
-        "шесть тысяч ", "семь ", "семьдесят ", "семьсот ", "семь тысяч ", "восемь ", "восемьдесят ", "восемьсот ",
-        "восемь тысяч ", "девять ", "девяносто ", "девятьсот ", "девять тысяч ", "" )
+    var b = ""
+    var s = listOf<String>()
     while (a != 0) {
         if (k == 2) k = -2
         r = a % 10
         k += 1
-        if (a / 10 % 10 == 1 && k == -1 && b[40] == "" || a / 10 % 10 == 1 && k == 2) {
+        if (a / 10 % 10 == 1 && k == -1 && b == "" || a / 10 % 10 == 1 && k == 2) {
             if (k == 2) {
-                k = 1 // -1
-                b[40] = "тысяч " + b[40]
+                k = 1
+                b = "тысяч " + b
             }
             if (k == -1) k = 1
             when {
-                r == 0 -> b[40] = "десять " + b[40]
-                r == 1 -> b[40] = "одиннадцать " + b[40]
-                r == 2 -> b[40] = "двенадцать " + b[40]
-                r == 3 -> b[40] = "тринадцать " + b[40]
-                r == 4 -> b[40] = "четырнадцать " + b[40]
-                r == 5 -> b[40] = "пятнадцать " + b[40]
-                r == 6 -> b[40] = "шестнадцать " + b[40]
-                r == 7 -> b[40] = "семнадцать " + b[40]
-                r == 8 -> b[40] = "восемнадцать " + b[40]
-                r == 9 -> b[40] = "девятнадцать " + b[40]
+                r == 0 -> b = "десять " + b
+                r == 1 -> b = "одиннадцать " + b
+                r == 2 -> b = "двенадцать " + b
+                r == 3 -> b = "тринадцать " + b
+                r == 4 -> b = "четырнадцать " + b
+                r == 5 -> b = "пятнадцать " + b
+                r == 6 -> b = "шестнадцать " + b
+                r == 7 -> b = "семнадцать " + b
+                r == 8 -> b = "восемнадцать " + b
+                r == 9 -> b = "девятнадцать " + b
             }
             a /= 100
             r = a % 10
         }
         a /= 10
-        if (b[40] != "" && k == -1) k = 0
+        if (b != "" && k == -1) k = 0
+        when { //
+            k == -1 -> s = listOf("", "один ", "два ", "три ", "четыре ", "пять ", "шесть ", "семь ", "восемь ",
+                "девять ")
+            k == 0 -> s = listOf("", "", "двадцать ", "тридцать ", "сорок ", "пятьдесят ", "шестьдесят ", "семьдесят ",
+                "восемьдесят ", "девяносто ", "")
+            k == 1 -> s = listOf("", "сто ", "двести ", "триста ", "четыреста ", "пятьсот ", "шестьсот ", "семьсот ",
+                "восемьсот ", "девятьсот ", "")
+            k == 2 -> s = listOf("тысяч ", "одна тысяча ", "две тысячи ", "три тысячи ", "четыре тысячи ",
+                "пять тысяч ", "шесть тысяч ", "семь тысяч ", "восемь тысяч ", "девять тысяч ")
+        } //
         when {
-            r == 0 -> b[40] = b[k + 1] + b[40]
-            r == 1 -> b[40] = b[k + 5] + b[40]
-            r == 2 -> b[40] = b[k + 9] + b[40]
-            r == 3 -> b[40] = b[k + 13] + b[40]
-            r == 4 -> b[40] = b[k + 17] + b[40]
-            r == 5 -> b[40] = b[k + 21] + b[40]
-            r == 6 -> b[40] = b[k + 25] + b[40]
-            r == 7 -> b[40] = b[k + 29] + b[40]
-            r == 8 -> b[40] = b[k + 33] + b[40]
-            r == 9 -> b[40] = b[k + 37] + b[40]
+            r == 0 -> b = s[0] + b
+            r == 1 -> b = s[1] + b
+            r == 2 -> b = s[2] + b
+            r == 3 -> b = s[3] + b
+            r == 4 -> b = s[4] + b
+            r == 5 -> b = s[5] + b
+            r == 6 -> b = s[6] + b
+            r == 7 -> b = s[7] + b
+            r == 8 -> b = s[8] + b
+            r == 9 -> b = s[9] + b
         }
     }
-    return b[40].trim()
+    return b.trim()
 }

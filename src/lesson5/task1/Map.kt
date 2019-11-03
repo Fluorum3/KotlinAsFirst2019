@@ -104,9 +104,9 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
 fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
-    var k = false
+    var k = true
     for ((c, d) in a) {
-        if (d == b[c]) k = true
+        if (d != b[c]) k = false
     }
     return k
 }
@@ -164,7 +164,18 @@ fun whoAreInBoth(a: List<String>, b: List<String>): List<String> {
  *     mapOf("Emergency" to "911", "Police" to "02")
  *   ) -> mapOf("Emergency" to "112, 911", "Police" to "02")
  */
-fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> = TODO()
+fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> {
+    val s = mutableMapOf<String, String>()
+    for ((a, b) in mapA)
+        s[a] = b
+    for ((i, j) in mapB) {
+        if (i in s) {
+            if (j == s[i]) Double.NaN
+            else s[i] = s[i] + ", " + j
+        } else s[i] = j
+    }
+    return s
+}
 
 /**
  * Средняя

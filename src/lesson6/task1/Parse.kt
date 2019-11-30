@@ -2,6 +2,8 @@
 
 package lesson6.task1
 
+import java.lang.NumberFormatException
+
 /**
  * Пример
  *
@@ -69,7 +71,24 @@ fun main() {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30.02.2009) считается неверными
  * входными данными.
  */
-fun dateStrToDigit(str: String): String = TODO()
+fun dateStrToDigit(str: String): String {
+    val a = str.split(" ")
+    val b = mapOf("января" to 1, "февраля" to 2, "марта" to 3, "апреля" to 4, "мая" to 5, "июня" to 6,
+        "июля" to 7, "августа" to 8, "сентября" to 9, "октября" to 10, "ноября" to 11, "декабря" to 12)
+    if (a.size != 3) return ""
+    try {
+        if ((b[a[1]] == 1 ||b[a[1]] == 3 ||b[a[1]] == 5 ||b[a[1]] == 7 || b[a[1]] == 8 ||
+                    b[a[1]] == 10 ||b[a[1]] == 12) && a[0].toInt() > 31) return ""
+        if ((b[a[1]] == 4 || b[a[1]] == 6 ||b[a[1]] == 9 ||b[a[1]] == 11) &&
+            a[0].toInt() > 30) return ""
+        if (b[a[1]] == 2 && a[2].toInt() % 4 != 0 && a[0].toInt() > 28) return ""
+        if (b[a[1]] == null) return ""
+        return String.format("%02d.%02d.%d", a[0].toInt(), b[a[1]], a[2].toInt())
+    } catch (e: Exception) {
+        return ""
+    }
+
+}
 
 /**
  * Средняя
@@ -97,7 +116,17 @@ fun dateDigitToStr(digital: String): String = TODO()
  *
  * PS: Дополнительные примеры работы функции можно посмотреть в соответствующих тестах.
  */
-fun flattenPhoneNumber(phone: String): String = TODO()
+fun flattenPhoneNumber(phone: String): String = TODO() //{
+    //var a: String
+    //var c = ""
+    //val g = listOf("+", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
+    //for (i in 0..phone.length - 1) {
+        //a = phone[i].toString()
+        //if (a in g == true) c += a
+       // else if (a != "-" && a != "(" && a != ")" && a != " ") return ""
+    //}
+    //return c
+//}
 
 /**
  * Средняя
@@ -106,7 +135,7 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  * "706 - % 717 % 703".
  * В строке могут присутствовать числа, черточки - и знаки процента %, разделённые пробелами;
  * число соответствует удачному прыжку, - пропущенной попытке, % заступу.
- * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
+ * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в  примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
 fun bestLongJump(jumps: String): Int = TODO()

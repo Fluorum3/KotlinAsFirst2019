@@ -82,6 +82,7 @@ fun dateStrToDigit(str: String): String {
         if ((b[a[1]] == 4 || b[a[1]] == 6 ||b[a[1]] == 9 ||b[a[1]] == 11) &&
             a[0].toInt() > 30) return ""
         if (b[a[1]] == 2 && a[2].toInt() % 4 != 0 && a[0].toInt() > 28) return ""
+        if (b[a[1]] == 2 && a[2].toInt() % 4 == 0 && a[0].toInt() > 29) return ""
         if (b[a[1]] == null) return ""
         return String.format("%02d.%02d.%d", a[0].toInt(), b[a[1]], a[2].toInt())
     } catch (e: Exception) {
@@ -116,17 +117,23 @@ fun dateDigitToStr(digital: String): String = TODO()
  *
  * PS: Дополнительные примеры работы функции можно посмотреть в соответствующих тестах.
  */
-fun flattenPhoneNumber(phone: String): String = TODO() //{
-    //var a: String
-    //var c = ""
-    //val g = listOf("+", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
-    //for (i in 0..phone.length - 1) {
-        //a = phone[i].toString()
-        //if (a in g == true) c += a
-       // else if (a != "-" && a != "(" && a != ")" && a != " ") return ""
-    //}
-    //return c
-//}
+fun flattenPhoneNumber(phone: String): String {
+    var a = 0
+    var c = ""
+    val g = listOf("+", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
+    for (i in 0..phone.length - 1) {
+        if (phone[i].toString() == "(") { //a
+            for (l in i..phone.length - 1) {
+                if (phone[l].toString() in g == true) a = 1
+                if (phone[l].toString() == ")" && a == 1) break
+                if (phone[l].toString() == ")" && a == 0) return ""
+            }
+        }
+        if (phone[i].toString() in g == true) c += phone[i].toString()
+        else if (phone[i].toString() != "-" && phone[i].toString() != "(" && phone[i].toString() != ")" && phone[i].toString() != " ") return ""
+    }
+    return c
+}
 
 /**
  * Средняя

@@ -220,6 +220,7 @@ fun firstDuplicateIndex(str: String): Int {
                 b += a[j]
             c = b.length + i - 1
             b = "0"
+            break
         }
     }
     if (b != "0") return -1

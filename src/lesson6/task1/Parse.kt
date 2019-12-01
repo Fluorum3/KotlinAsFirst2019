@@ -83,6 +83,7 @@ fun dateStrToDigit(str: String): String {
             a[0].toInt() > 30) return ""
         if (b[a[1]] == 2 && a[2].toInt() % 4 != 0 && a[0].toInt() > 28) return ""
         if (b[a[1]] == 2 && a[2].toInt() % 4 == 0 && a[2].toInt() % 100 == 0 && a[0].toInt() > 29) return ""
+        if (b[a[1]] == 2 && a[2].toInt() % 4 == 0 && a[0].toInt() > 29) return ""
         if (b[a[1]] == null) return ""
         return String.format("%02d.%02d.%d", a[0].toInt(), b[a[1]], a[2].toInt())
     } catch (e: Exception) {
@@ -171,7 +172,23 @@ fun bestLongJump(jumps: String): Int {
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
+fun bestHighJump(jumps: String): Int {
+    val a = jumps.split(" ")
+    var b = -1
+    if (a.size < 2) return -1
+    try {
+        for (i in 1 until a.size step 2) {
+            if ("+" in a[i] == true) {
+                if (a[i - 1].toInt() > b) b = a[i - 1].toInt()
+            }
+            for (j in a[i])
+                if (j.toString() != "+" && j.toString() != "-" && j.toString() != "%" ) return -1
+        }
+    } catch (e: Exception) {
+        return -1
+    }
+    return b
+}
 
 /**
  * Сложная

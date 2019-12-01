@@ -222,7 +222,7 @@ fun firstDuplicateIndex(str: String): Int {
             b = "0"
         }
     }
-    if (b == "0") return -1
+    if (b != "0") return -1
     return c
 }
 

@@ -82,7 +82,7 @@ fun dateStrToDigit(str: String): String {
         if ((b[a[1]] == 4 || b[a[1]] == 6 ||b[a[1]] == 9 ||b[a[1]] == 11) &&
             a[0].toInt() > 30) return ""
         if (b[a[1]] == 2 && a[2].toInt() % 4 != 0 && a[0].toInt() > 28) return ""
-        if (b[a[1]] == 2 && a[2].toInt() % 4 == 0 && a[2].toInt() % 100 != 0 && a[0].toInt() > 29) return ""
+        if (b[a[1]] == 2 && a[2].toInt() % 4 == 0 && a[2].toInt() % 100 == 0 && a[0].toInt() > 29) return ""
         if (b[a[1]] == null) return ""
         return String.format("%02d.%02d.%d", a[0].toInt(), b[a[1]], a[2].toInt())
     } catch (e: Exception) {
@@ -146,7 +146,19 @@ fun flattenPhoneNumber(phone: String): String {
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в  примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()
+fun bestLongJump(jumps: String): Int {
+    var a = jumps.split(" ")
+    var b = 0
+    a = a.filter({it != "%" && it != "-"})
+    if (a.isEmpty() == true) return -1
+    try {
+        for (i in 0 until a.size)
+            if (b < a[i].toInt()) b = a[i].toInt()
+    } catch (e: Exception) {
+        return -1
+    }
+    return b
+}
 
 /**
  * Сложная

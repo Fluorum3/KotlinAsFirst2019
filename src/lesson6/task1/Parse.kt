@@ -219,9 +219,10 @@ fun firstDuplicateIndex(str: String): Int {
             for (j in 0..i - 2)
                 b += a[j]
             c = b.length + i - 1
+            b = "0"
         }
     }
-    if (c == 0) return -1
+    if (b == "0") return -1
     return c
 }
 

@@ -104,13 +104,13 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
 fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean  {
-    //var k = true
+    var k = true
     for ((c, d) in a) {
-        return a.all { d == b[c] }
-        //if (d != b[c]) k = false
+        //return a.all { d == b[c] }
+        if (d != b[c]) k = false
     }
-    //return k
-    return false
+    return k
+    //return false
 }
 
 /**

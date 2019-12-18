@@ -153,7 +153,6 @@ fun bestLongJump(jumps: String): Int {
     a = a.filter({it != "%" && it != "-"})
     if (a.isEmpty()) return -1
     try {
-        //b = a
         for (i in 0 until a.size)
             if (b < a[i].toInt()) b = a[i].toInt()
     } catch (e: Exception) {

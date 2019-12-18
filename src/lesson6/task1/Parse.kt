@@ -151,8 +151,9 @@ fun bestLongJump(jumps: String): Int {
     var a = jumps.split(" ")
     var b = 0
     a = a.filter({it != "%" && it != "-"})
-    if (a.isEmpty() == true) return -1
+    if (a.isEmpty()) return -1
     try {
+        //b = a
         for (i in 0 until a.size)
             if (b < a[i].toInt()) b = a[i].toInt()
     } catch (e: Exception) {
@@ -178,11 +179,11 @@ fun bestHighJump(jumps: String): Int {
     if (a.size < 2) return -1
     try {
         for (i in 1 until a.size step 2) {
-            if ("+" in a[i] == true) {
+            if ("+" in a[i]) {
                 if (a[i - 1].toInt() > b) b = a[i - 1].toInt()
             }
             for (j in a[i])
-                if (j.toString() != "+" && j.toString() != "-" && j.toString() != "%" ) return -1
+                if (j != '+' && j != '-' && j != '%' ) return -1
         }
     } catch (e: Exception) {
         return -1
@@ -215,9 +216,10 @@ fun firstDuplicateIndex(str: String): Int {
     var b = ""
     var c = 0
     for (i in 1 until a.size) {
+        if (i > 1) b += a[i - 2]
         if (a[i].toLowerCase() == a[i-1].toLowerCase()) {
-            for (j in 0..i - 2)
-                b += a[j]
+            //for (j in 0..i - 2)
+                //b += a[j]
             c = b.length + i - 1
             b = "0"
             break

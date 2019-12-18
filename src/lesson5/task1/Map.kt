@@ -103,12 +103,14 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "z", "b" to "sweet")) -> true
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
-fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
-    var k = true
+fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean  {
+    //var k = true
     for ((c, d) in a) {
-        if (d != b[c]) k = false
+        return a.all { d == b[c] }
+        //if (d != b[c]) k = false
     }
-    return k
+    //return k
+    return false
 }
 
 /**
@@ -137,14 +139,15 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): Unit {
  * В выходном списке не должно быть повторяюихся элементов,
  * т. е. whoAreInBoth(listOf("Марат", "Семён, "Марат"), listOf("Марат", "Марат")) == listOf("Марат")
  */
-fun whoAreInBoth(a: List<String>, b: List<String>): List<String> {
-    val c = mutableListOf<String>()
-    for (i in a) {
-        for (j in b)
-            if (i == j && j in c == false ) c.add(j)
-    }
-    return c
-}
+fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = a.intersect(b).toList() //{
+    //val c = mutableListOf<String>()
+    //val c = f.toMutableList()
+    //for (i in a) {
+        //for (j in b)
+            //if (i == j && j in c == false ) c.add(j)
+    //}
+    //return c
+//}
 
 
 /**
@@ -165,9 +168,10 @@ fun whoAreInBoth(a: List<String>, b: List<String>): List<String> {
  *   ) -> mapOf("Emergency" to "112, 911", "Police" to "02")
  */
 fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> {
-    val s = mutableMapOf<String, String>()
-    for ((a, b) in mapA)
-        s[a] = b
+    //var s = mutableMapOf<String, String>()
+    //for ((a, b) in mapA)
+        //s[a] = b
+    val s: MutableMap<String, String> = mapA.toMutableMap()
     for ((i, j) in mapB) {
         if (i in s) {
             if (j == s[i]) Double.NaN

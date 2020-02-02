@@ -88,8 +88,19 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  * Исключения (жюри, брошюра, парашют) в рамках данного задания обрабатывать не нужно
  *
  */
-fun sibilants(inputName: String, outputName: String) {
-    TODO()
+fun sibilants(inputName: String, outputName: String) { // Не могу понять где ошибка
+    val d = File(inputName).readText()
+    val a = mapOf<Char, String>('ш' to "и", 'ж' to "и", 'ч' to "а", 'щ' to "а", 'ч' to "у", 'щ' to "у")
+    val b = mapOf<Char, String>('ы' to "и", 'Ы' to "И", 'я' to "а", 'Я' to "А", 'ю' to "у", 'Ю' to "У")
+    val y = File(outputName).printWriter()
+    var n = d[0].toString()
+    for (i in 1..d.lastIndex) {
+        if (a[d[i - 1].toLowerCase()] == b[d[i].toLowerCase()] && b[d[i]] != null) {
+            n += (b[d[i]]).toString()
+        } else n += (d[i])
+    }
+    y.print(n)
+    y.close()
 }
 
 /**
@@ -163,46 +174,47 @@ fun alignFileByWidth(inputName: String, outputName: String) {
  *
  */
 fun top20Words(inputName: String): Map<String, Int> {
-    val a = File(inputName).readText()
-    val d = mutableListOf<String>()
-    val b = listOf('й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л',
-        'д', 'ж', 'э', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
-        'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'ё')
-    var c = ""
-    var s = 0
-    val r = mutableListOf<Int>()
-    val x = mutableMapOf<String, Int>()
-    if (a.isEmpty()) return x
-    var f : String
-    for (k in File(inputName).readLines()) {
-        if ("\r\n" in File(inputName).readText()) f = k + " " else f = k
-        for (i in f) {
-            if (i.toLowerCase() !in b ) {
-                d.add(c)
-                c = ""
-            } else c += i.toString().toLowerCase()
-        }
-    }
-    while ("" in d) {
-        d.remove("")
-    }
-    for (j in d) {
-        s = d.count{it == j}
-        r.add(s)
-        s = 0
-    }
-    var k = 19
-    if (d.size < 20) k = d.size
-    for (n in 0..k) {
-        s = r.indexOf(r.max())
-        f = d[s]
-        x[f] = r[s]
-        while (f in d) {
-            r.removeAt(d.indexOf(f))
-            d.remove(f)
-        }
-    }
-    return x.filter { ( it.value != r[s] ) }
+    TODO()
+    //val a = File(inputName).readText()
+    //val d = mutableListOf<String>()
+    //val b = listOf('й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л',
+        //'д', 'ж', 'э', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
+        //'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'ё')
+    ///var c = ""
+    //var s = 0
+    //val r = mutableListOf<Int>()
+    //val x = mutableMapOf<String, Int>()
+    //if (a.isEmpty()) return x
+    //var f : String
+    //for (k in File(inputName).readLines()) {
+        //if ("\r\n" in File(inputName).readText()) f = k + " " else f = k
+        //for (i in f) {
+            //if (i.toLowerCase() !in b ) {
+                //d.add(c)
+                //c = ""
+            //} else c += i.toString().toLowerCase()
+        //}
+    //}
+    //while ("" in d) {
+        //d.remove("")
+    //}
+    //for (j in d) {
+        //s = d.count{it == j}
+        //r.add(s)
+        //s = 0
+    //}
+    //var k = 19
+    //if (d.size < 20) k = d.size
+    //for (n in 0..k) {
+        //s = r.indexOf(r.max())
+       // f = d[s]
+        //x[f] = r[s]
+        //while (f in d) {
+           // r.removeAt(d.indexOf(f))
+           // d.remove(f)
+        //}
+   // }
+    //return x.filter { ( it.value != r[s] ) }
 }
 /**
  * Средняя

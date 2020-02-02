@@ -163,7 +163,7 @@ fun alignFileByWidth(inputName: String, outputName: String) {
  *
  */
 fun top20Words(inputName: String): Map<String, Int> {
-    val a = File(inputName).readLines()
+    val a = File(inputName).readText()
     val d = mutableListOf<String>()
     val b = listOf('й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л',
         'д', 'ж', 'э', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
@@ -175,7 +175,7 @@ fun top20Words(inputName: String): Map<String, Int> {
     if (a.isEmpty()) return x
     var f : String
     for (k in File(inputName).readLines()) {
-        f = k + " "
+        if ("\r\n" in File(inputName).readText()) f = k + " " else f = k
         for (i in f) {
             if (i.toLowerCase() !in b ) {
                 d.add(c)

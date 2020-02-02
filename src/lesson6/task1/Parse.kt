@@ -84,9 +84,6 @@ fun dateStrToDigit(str: String): String {
         if (b[a[1]] == 2 && a[0].toInt() > 29) return ""
         if (b[a[1]] == 2 && a[2].toInt() % 4 != 0 && a[0].toInt() == 29) return ""
         if (b[a[1]] == 2 && a[2].toInt() % 100 == 0 && a[2].toInt() % 400 != 0 && a[0].toInt() == 29) return ""
-        //if (b[a[1]] == 2 && a[2].toInt() % 4 != 0 && a[0].toInt() > 28) return ""
-        //if (b[a[1]] == 2 && a[2].toInt() % 4 == 0 && a[2].toInt() % 100 == 0 && a[0].toInt() > 29) return ""
-        //if (b[a[1]] == 2 && a[2].toInt() % 4 == 0 && a[0].toInt() > 29) return ""
         if (b[a[1]] == null) return ""
         return String.format("%02d.%02d.%d", a[0].toInt(), b[a[1]], a[2].toInt())
     } catch (e: Exception) {

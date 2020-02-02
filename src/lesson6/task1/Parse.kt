@@ -119,22 +119,34 @@ fun dateDigitToStr(digital: String): String = TODO()
  * PS: Дополнительные примеры работы функции можно посмотреть в соответствующих тестах.
  */
 fun flattenPhoneNumber(phone: String): String {
-    var a = 0
+    //var a = 0
+    //var c = ""
+    //val g = listOf("+", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
+    //for (i in 0..phone.length - 1) {
+        //if (phone[i].toString() == "(") {
+            //for (l in i..phone.length - 1) {
+                //if (phone[l].toString() in g == true) a = 1
+                //if (phone[l].toString() == ")" && a == 1) break
+                //if (phone[l].toString() == ")" && a == 0) return ""
+            //}
+        //}
+        //if (phone[i].toString() in g == true) c += phone[i].toString()
+        //else if (phone[i].toString() != "-" && phone[i].toString() != "(" && phone[i].toString() != ")" &&
+            //phone[i].toString() != " ") return ""
+    //}
+    //return c
     var c = ""
-    val g = listOf("+", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
-    for (i in 0..phone.length - 1) {
-        if (phone[i].toString() == "(") {
-            for (l in i..phone.length - 1) {
-                if (phone[l].toString() in g == true) a = 1
-                if (phone[l].toString() == ")" && a == 1) break
-                if (phone[l].toString() == ")" && a == 0) return ""
-            }
-        }
-        if (phone[i].toString() in g == true) c += phone[i].toString()
-        else if (phone[i].toString() != "-" && phone[i].toString() != "(" && phone[i].toString() != ")" &&
-            phone[i].toString() != " ") return ""
+    for (j in Regex("""[^\s+()\d-]""").findAll(phone, 0) )
+        if (j.value != "" ) return ""
+    for (i in Regex("""[+()\d]""").findAll(phone, 0)) {
+        c += i.value
+    }
+    if ("(" in c || ")" in c) {
+        if (c.indexOf(")") - c.indexOf("(") == 1) return ""
+        c = c.filter { (it != '(' && it != ')') }
     }
     return c
+
 }
 
 /**
@@ -153,8 +165,9 @@ fun bestLongJump(jumps: String): Int {
     a = a.filter({it != "%" && it != "-"})
     if (a.isEmpty()) return -1
     try {
-        for (i in 0 until a.size)
-            if (b < a[i].toInt()) b = a[i].toInt()
+        //for (i in 0 until a.size)
+            //if (b < a[i].toInt()) b = a[i].toInt()
+        a.forEach{ if (b < it.toInt()) b = it.toInt() }
     } catch (e: Exception) {
         return -1
     }
@@ -217,8 +230,6 @@ fun firstDuplicateIndex(str: String): Int {
     for (i in 1 until a.size) {
         if (i > 1) b += a[i - 2]
         if (a[i].toLowerCase() == a[i-1].toLowerCase()) {
-            //for (j in 0..i - 2)
-                //b += a[j]
             c = b.length + i - 1
             b = "0"
             break

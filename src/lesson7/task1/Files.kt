@@ -3,6 +3,7 @@
 package lesson7.task1
 
 import java.io.File
+import kotlin.math.ln
 
 /**
  * Пример
@@ -63,8 +64,8 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
             a = 0
             while (f.toLowerCase().indexOf(i.toLowerCase(), a) != -1) {
                 a = f.toLowerCase().indexOf(i.toLowerCase(), a)
-                a += 1
-                c += 1
+                a++
+                c++
 
             }
             b[i] = c
@@ -88,8 +89,8 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  *
  */
 fun sibilants(inputName: String, outputName: String) {
-    TODO()
 }
+
 /**
  * Средняя
  *
@@ -108,7 +109,7 @@ fun sibilants(inputName: String, outputName: String) {
  *
  */
 fun centerFile(inputName: String, outputName: String) {
-    TODO()
+
 }
 
 /**
@@ -160,8 +161,46 @@ fun alignFileByWidth(inputName: String, outputName: String) {
  * Ключи в ассоциативном массиве должны быть в нижнем регистре.
  *
  */
-fun top20Words(inputName: String): Map<String, Int> = TODO()
-
+fun top20Words(inputName: String): Map<String, Int> {
+    val a = File(inputName).readLines()
+    val d = mutableListOf<String>()
+    val b = listOf('й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ', 'ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л',
+        'д', 'ж', 'э', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p',
+        'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'ё')
+    var c = ""
+    var s = 0
+    val r = mutableListOf<Int>()
+    val x = mutableMapOf<String, Int>()
+    if (a.isEmpty()) return x
+    var f : String
+    for (k in File(inputName).readLines()) {
+        f = k + " "
+        for (i in f) {
+            if (i.toLowerCase() !in b ) {
+                d.add(c)
+                c = ""
+            } else c += i.toString().toLowerCase()
+        }
+    }
+    while ("" in d) {
+        d.remove("")
+    }
+    for (j in d) {
+        s = d.count{it == j}
+        r.add(s)
+        s = 0
+    }
+    for (n in 1..20) {
+        s = r.indexOf(r.max())
+        f = d[s]
+        x[f] = r[s]
+        while (f in d) {
+            r.removeAt(d.indexOf(f))
+            d.remove(f)
+        }
+    }
+    return x.filter { ( it.value != r[s] ) }
+}
 /**
  * Средняя
  *

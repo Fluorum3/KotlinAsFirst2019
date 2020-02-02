@@ -164,13 +164,25 @@ fun times(a: List<Int>, b: List<Int>): Int = TODO()
  * Значение пустого многочлена равно 0 при любом x.
  */
 fun polynom(p: List<Int>, x: Int): Int {
-    var a = 0
-    var b = 1
-    for (element in p) {
-        a += element * b
-        b *= x
+    fun l(n: Int, x: Int): Int {
+        if (n == 0) return 1
+        if (n == 1) return x
+        var k = x
+        var a = n
+        while (a != 1) {
+            k *= x
+            a -= 1
+        }
+        return k
     }
-    return a
+    //var a = 0
+    //var b = 1
+    //for (element in p) {
+    //    a += element * b
+     //   b *= x
+    //}
+    return p.mapIndexed{index, it -> it * l(index, x) }.sum()
+    //return a
 }
 
 /**

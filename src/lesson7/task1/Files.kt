@@ -191,9 +191,9 @@ fun top20Words(inputName: String): Map<String, Int> {
         r.add(s)
         s = 0
     }
-    var k = 20
+    var k = 19
     if (d.size < 20) k = d.size
-    for (n in 1..k) {
+    for (n in 0..k) {
         s = r.indexOf(r.max())
         f = d[s]
         x[f] = r[s]

@@ -81,9 +81,12 @@ fun dateStrToDigit(str: String): String {
                     b[a[1]] == 10 ||b[a[1]] == 12) && a[0].toInt() > 31) return ""
         if ((b[a[1]] == 4 || b[a[1]] == 6 ||b[a[1]] == 9 ||b[a[1]] == 11) &&
             a[0].toInt() > 30) return ""
-        if (b[a[1]] == 2 && a[2].toInt() % 4 != 0 && a[0].toInt() > 28) return ""
-        if (b[a[1]] == 2 && a[2].toInt() % 4 == 0 && a[2].toInt() % 100 == 0 && a[0].toInt() > 29) return ""
-        if (b[a[1]] == 2 && a[2].toInt() % 4 == 0 && a[0].toInt() > 29) return ""
+        if (b[a[1]] == 2 && a[0].toInt() > 29) return ""
+        if (b[a[1]] == 2 && a[2].toInt() % 4 != 0 && a[0].toInt() == 29) return ""
+        if (b[a[1]] == 2 && a[2].toInt() % 100 == 0 && a[2].toInt() % 400 != 0 && a[0].toInt() == 29) return ""
+        //if (b[a[1]] == 2 && a[2].toInt() % 4 != 0 && a[0].toInt() > 28) return ""
+        //if (b[a[1]] == 2 && a[2].toInt() % 4 == 0 && a[2].toInt() % 100 == 0 && a[0].toInt() > 29) return ""
+        //if (b[a[1]] == 2 && a[2].toInt() % 4 == 0 && a[0].toInt() > 29) return ""
         if (b[a[1]] == null) return ""
         return String.format("%02d.%02d.%d", a[0].toInt(), b[a[1]], a[2].toInt())
     } catch (e: Exception) {
@@ -119,22 +122,6 @@ fun dateDigitToStr(digital: String): String = TODO()
  * PS: Дополнительные примеры работы функции можно посмотреть в соответствующих тестах.
  */
 fun flattenPhoneNumber(phone: String): String {
-    //var a = 0
-    //var c = ""
-    //val g = listOf("+", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0")
-    //for (i in 0..phone.length - 1) {
-        //if (phone[i].toString() == "(") {
-            //for (l in i..phone.length - 1) {
-                //if (phone[l].toString() in g == true) a = 1
-                //if (phone[l].toString() == ")" && a == 1) break
-                //if (phone[l].toString() == ")" && a == 0) return ""
-            //}
-        //}
-        //if (phone[i].toString() in g == true) c += phone[i].toString()
-        //else if (phone[i].toString() != "-" && phone[i].toString() != "(" && phone[i].toString() != ")" &&
-            //phone[i].toString() != " ") return ""
-    //}
-    //return c
     var c = ""
     for (j in Regex("""[^\s+()\d-]""").findAll(phone, 0) )
         if (j.value != "" ) return ""
@@ -165,8 +152,6 @@ fun bestLongJump(jumps: String): Int {
     a = a.filter({it != "%" && it != "-"})
     if (a.isEmpty()) return -1
     try {
-        //for (i in 0 until a.size)
-            //if (b < a[i].toInt()) b = a[i].toInt()
         a.forEach{ if (b < it.toInt()) b = it.toInt() }
     } catch (e: Exception) {
         return -1

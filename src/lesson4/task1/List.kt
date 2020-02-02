@@ -175,14 +175,7 @@ fun polynom(p: List<Int>, x: Int): Int {
         }
         return k
     }
-    //var a = 0
-    //var b = 1
-    //for (element in p) {
-    //    a += element * b
-     //   b *= x
-    //}
     return p.mapIndexed{index, it -> it * l(index, x) }.sum()
-    //return a
 }
 
 /**
